@@ -2,10 +2,12 @@ import React from 'react';
 import './table.css';
 import getDpMatrixCells from '../algorithms/dpMatrix';
 import getDotMatrixCells from '../algorithms/dotMatrix';
+import getDotMatrixWindowCells from '../algorithms/dotMatrixWindow';
 
 export const Table = ({ string1, string2 }) => {
     // const length = string1.length;
-    const cells = getDotMatrixCells(string1, string2);
+    // const cells = getDotMatrixCells(string1, string2);
+    const cells = getDotMatrixWindowCells(string1, string2, 9, 3, 4);
     console.log(cells);
     const cellsJSX = [];
     for (let i = 0; i < string1.length + 1; i++) {
