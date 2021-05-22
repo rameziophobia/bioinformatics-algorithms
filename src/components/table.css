@@ -1,0 +1,32 @@
+.table_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.table_row {
+    display: flex;
+    flex-direction: row;
+
+    border-right: 3px solid darkslategrey;
+    border-left: 3px solid darkslategrey;
+}
+
+.table_row:first-child {
+    border-top: 3px solid darkslategrey;
+}
+
+.table_row:last-child {
+    border-bottom: 3px solid darkslategrey;
+}
+
+.table_cell {
+    width: 4em;
+    height: 4em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+    border: 3px solid darkslategrey;
+}
