@@ -4,12 +4,14 @@ import getDpMatrixCells from '../algorithms/dpMatrix';
 import getDotMatrixCells from '../algorithms/dotMatrix';
 import getDotMatrixWindowCells from '../algorithms/dotMatrixWindow';
 import getNeedlemanMatrixCells from '../algorithms/needleman';
+import getWatermanMatrixCells from '../algorithms/waterman';
 
 export const Table = ({ string1, string2 }) => {
     // const length = string1.length;
     // const cells = getDotMatrixCells(string1, string2);
     // const cells = getDotMatrixWindowCells(string1, string2, 9, 3, 4);
-    const cells = getNeedlemanMatrixCells(string1, string2, 7, -3, -2);
+    // const cells = getNeedlemanMatrixCells(string1, string2, 7, -3, -2);
+    const cells = getWatermanMatrixCells(string1, string2, 5, -2, -6);
     console.log(cells);
 
     const string_1 = 'j' + string1;
