@@ -4,6 +4,11 @@ const getDpMatrixCells = (string1, string2) => {
         const row = [];
         for (let j = 0; j < string2.length; j++) {
             const isMatch = string1[i] === string2[j];
+            if (i === 0 || j === 0) {
+                row.push(isMatch ? 1 : 0);
+                continue;
+            }
+
             const prevData = {
                 row: 0,
                 col: 0,
@@ -15,7 +20,6 @@ const getDpMatrixCells = (string1, string2) => {
             if (i !== 0) {
                 prevData.col = cells[i - 1][j];
             }
-
             if (j !== 0 && i !== 0) {
                 prevData.diagonal = cells[i - 1][j - 1];
             }
