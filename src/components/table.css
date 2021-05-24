@@ -34,3 +34,21 @@
 .table_header {
     background-color: honeydew;
 }
+
+.table_nav_buttons {
+    margin: 0.5em;
+    width: 4em;
+    background-color: aqua;
+    border: 1px solid darkslategrey;
+    border-radius: 10px;
+    padding: 0.5em;
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.horizontal_flex {
+    display: flex;
+    flex-direction: row;
+}

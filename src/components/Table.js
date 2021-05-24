@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './table.css';
 
 export const Table = ({ string1, string2, cells, hasPadding }) => {
@@ -6,8 +6,25 @@ export const Table = ({ string1, string2, cells, hasPadding }) => {
 
     const modified_string1 = hasPadding ? 'i' + string1 : string1;
     const modified_string2 = hasPadding ? 'j' + string2 : string2;
+    const maxIters = modified_string1.length * modified_string2.length;
+    const [stopIter, setStopIter] = useState(0);
 
+    let currentIter = 0;
     const cellsJSX = [];
+
+    // todo: animation
+    // const timerRef = useRef();
+    // useEffect(() => {
+    //     clearTimeout(timerRef.current);
+    //     setStopIter(0);
+    // }, [cells]);
+
+    // useEffect(() => {
+    //     timerRef.current = setTimeout(() => {
+    //         setStopIter(() => Math.min(stopIter + 1, maxIters));
+    //     }, 1000);
+    // }, [stopIter, maxIters]);
+
     for (let i = 0; i < cells.length + 1; i++) {
         let row;
         if (i === 0) {
@@ -19,13 +36,39 @@ export const Table = ({ string1, string2, cells, hasPadding }) => {
         } else {
             row = [<div className="table_cell table_header">{modified_string1[i - 1]}</div>];
             for (let j = 0; j < cells[0].length; j++) {
-                row.push(<div className="table_cell">{cells[i - 1][j]}</div>);
+                if (cells[i - 1][j] === ' ') {
+                    currentIter--;
+                }
+                row.push(
+                    <div className="table_cell">
+                        {currentIter <= stopIter ? cells[i - 1][j] : ' '}
+                    </div>
+                );
+                currentIter++;
             }
         }
         cellsJSX.push(<div className="table_row">{row}</div>);
     }
 
-    return <div className="table_container">{cellsJSX}</div>;
+    return (
+        <>
+            <div className="table_container">
+                <div className="horizontal_flex">
+                    <div
+                        className="table_nav_buttons"
+                        onClick={() => setStopIter(Math.max(stopIter - 1, 0))}>
+                        Previous
+                    </div>
+                    <div
+                        className="table_nav_buttons"
+                        onClick={() => setStopIter(Math.min(stopIter + 1, maxIters))}>
+                        Next
+                    </div>
+                </div>
+                {cellsJSX}
+            </div>
+        </>
+    );
 };
 
 export default Table;

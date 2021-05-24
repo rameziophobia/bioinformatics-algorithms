@@ -59,7 +59,7 @@ export const Inputs = ({ handleInputsChange }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="form_container">
             <div className="input_label">
                 <label>
                     Sequence 1: &nbsp;
@@ -95,7 +95,7 @@ export const Inputs = ({ handleInputsChange }) => {
                 </label>
             </div>
             {extraOptionsJSX}
-            <input type="submit" value="Go" className="start_button" />
+            <input type="submit" value="GO" className="start_button" />
         </form>
     );
 };
