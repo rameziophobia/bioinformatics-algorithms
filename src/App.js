@@ -16,10 +16,20 @@ function App() {
     const [hasPadding, setHasPadding] = useState(true);
 
     const handleSelectChanged = (string1, string2, newAlgorithm, extraDetails) => {
+        const {
+            matchScore = 0,
+            mismatchScore = 0,
+            penalty = 0,
+            windowSize = 0,
+            stepSize = 0,
+            threshold = 0,
+        } = extraDetails;
         switch (newAlgorithm) {
             case 'waterman':
                 setHasPadding(true);
-                setCells(getWatermanMatrixCells(string1, string2, 5, -2, -6));
+                setCells(
+                    getWatermanMatrixCells(string1, string2, matchScore, mismatchScore, penalty)
+                );
                 break;
 
             case 'dotMatrix':
@@ -29,7 +39,9 @@ function App() {
                 break;
             case 'dotMatrixWindow':
                 setHasPadding(false);
-                setCells(getDotMatrixWindowCells(string1, string2, 9, 3, 4));
+                setCells(
+                    getDotMatrixWindowCells(string1, string2, windowSize, stepSize, threshold)
+                );
                 break;
             case 'dp':
                 setHasPadding(false);
@@ -38,7 +50,9 @@ function App() {
             case 'needleman':
             default:
                 setHasPadding(true);
-                setCells(getNeedlemanMatrixCells(string1, string2, 7, -3, -2));
+                setCells(
+                    getNeedlemanMatrixCells(string1, string2, matchScore, mismatchScore, penalty)
+                );
                 break;
         }
     };
