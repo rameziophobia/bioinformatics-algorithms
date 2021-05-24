@@ -13,6 +13,7 @@ function App() {
     const [stringState2, setString2] = useState('');
     const [cells, setCells] = useState([]);
     const [hasPadding, setHasPadding] = useState(true);
+    const [isWindow, setIsWindow] = useState(false);
 
     const handleSelectChanged = (string1, string2, newAlgorithm, extraDetails) => {
         const {
@@ -23,6 +24,7 @@ function App() {
             stepSize = 0,
             threshold = 0,
         } = extraDetails;
+        setIsWindow(false);
         switch (newAlgorithm) {
             case 'waterman':
                 setHasPadding(true);
@@ -37,10 +39,18 @@ function App() {
 
                 break;
             case 'dotMatrixWindow':
+                if (windowSize % stepSize !== 0) {
+                    // alert('window size should be divisible by the step size');
+                    // return true;
+                } else if (windowSize % 2 === 0) {
+                    alert('window size should be odd');
+                    return true;
+                }
                 setHasPadding(false);
                 setCells(
                     getDotMatrixWindowCells(string1, string2, windowSize, stepSize, threshold)
                 );
+                setIsWindow(true);
                 break;
             case 'dp':
                 setHasPadding(false);
@@ -54,12 +64,15 @@ function App() {
                 );
                 break;
         }
+        return false;
     };
 
     const handleInputsChange = (string1, string2, newAlgorithm, extraDetails) => {
-        setString1(string1);
-        setString2(string2);
-        handleSelectChanged(string1, string2, newAlgorithm, extraDetails);
+        const hasError = handleSelectChanged(string1, string2, newAlgorithm, extraDetails);
+        if (!hasError) {
+            setString1(string1);
+            setString2(string2);
+        }
     };
 
     return (
@@ -69,7 +82,8 @@ function App() {
                 string1={stringState1}
                 string2={stringState2}
                 cells={cells}
-                hasPadding={hasPadding}></Table>
+                hasPadding={hasPadding}
+                isWindow={isWindow}></Table>
         </div>
     );
 }
