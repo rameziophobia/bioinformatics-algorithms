@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Table from './components/Table';
 import Inputs from './components/Inputs';
@@ -64,7 +63,7 @@ function App() {
     };
 
     return (
-        <div className="App">
+        <div className="App" style={{ backgroundImage: 'url(/dna_background.jpg)' }}>
             <Inputs handleInputsChange={handleInputsChange}></Inputs>
             <Table
                 string1={stringState1}
