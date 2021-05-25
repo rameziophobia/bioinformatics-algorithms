@@ -26,7 +26,6 @@ const findAlignmentPaths = (maxScoreCells) => {
 const findAlignments = (paths, string1, string2, matchScore, mismatchScore, penalty) => {
     const alignments = [];
     for (const reveresedPath of paths) {
-        let score = 0;
         const path = reveresedPath.reverse();
         let alignedString1 = '';
         let alignedString2 = '';
@@ -39,26 +38,27 @@ const findAlignments = (paths, string1, string2, matchScore, mismatchScore, pena
                 alignedString1 = alignedString1 + '_';
                 alignedString2 = alignedString2 + string2[string2Index];
                 string2Index++;
-                score += penalty;
             } else if (node.colIndex === nextNode.colIndex) {
                 alignedString1 = alignedString1 + string1[string1Index];
                 string1Index++;
                 alignedString2 = alignedString2 + '_';
-                score += penalty;
             } else {
                 alignedString1 = alignedString1 + string1[string1Index];
                 alignedString2 = alignedString2 + string2[string2Index];
                 string1Index++;
                 string2Index++;
-                if (string1[string1Index] === string2[string2Index]) {
-                    score += matchScore;
-                } else {
-                    score += mismatchScore;
-                }
             }
         }
-        console.log(path);
-        console.log([alignedString1, alignedString2]);
+        let score = 0;
+        for (let i = 0; i < alignedString1.length; i++) {
+            if (alignedString1[i] === alignedString2[i]) {
+                score += matchScore;
+            } else if (alignedString1[i] === '_' || alignedString2[i] === '_') {
+                score += penalty;
+            } else {
+                score += mismatchScore;
+            }
+        }
         alignments.push([alignedString1, alignedString2, score]);
         return alignments;
     }
@@ -66,7 +66,6 @@ const findAlignments = (paths, string1, string2, matchScore, mismatchScore, pena
 };
 
 const findTableCellsAndMaxScoreCells = (string1, string2, matchScore, mismatchScore, penalty) => {
-    console.log('penalty', penalty);
     const cells = [];
     const maxScoreCells = [];
     let maxScore = 0;
@@ -148,7 +147,6 @@ const getWatermanMatrixCells = (string1, string2, matchScore, mismatchScore, pen
         mismatchScore,
         penalty
     );
-    console.log('cells', cells);
     const paths = findAlignmentPaths(maxScoreCells);
     const alignments = findAlignments(paths, string1, string2, matchScore, mismatchScore, penalty);
 

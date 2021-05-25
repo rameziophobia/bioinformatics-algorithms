@@ -24,7 +24,6 @@ const getDotMatrixWindowCells = (string1, string2, windowSize, step, threshold) 
                     numMatches++;
                 }
             }
-            console.log(numMatches, 'numMtches');
             const isMatch = numMatches >= threshold;
             if (isMatch) {
                 const matchIndexI = i + halfWindowSize;
@@ -33,7 +32,6 @@ const getDotMatrixWindowCells = (string1, string2, windowSize, step, threshold) 
             }
         }
     }
-    console.log(halfWindowSize);
     return { cells: cells };
 };
 

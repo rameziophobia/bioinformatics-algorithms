@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './table.css';
 
 export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
-    console.log('cells', cells.cells);
     const { alignments = [] } = cells;
-    console.log(alignments);
 
     const modified_string1 = hasPadding ? 'i' + string1 : string1;
     const modified_string2 = hasPadding ? 'j' + string2 : string2;
@@ -28,7 +26,6 @@ export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
             newMaxIter = modified_string1.length * modified_string2.length - 1;
         }
 
-        console.log(stopIter);
         setMaxIters(newMaxIter);
         setStopIter(Math.min(newMaxIter, stopIter));
     }, [cells.cells, isWindow, stopIter]);
@@ -93,7 +90,6 @@ export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
 
     return (
         <>
-            {console.log('in table render')}
             <div className="table_container">
                 <div className="horizontal_flex">
                     <div className="table_nav_buttons" onClick={() => setStopIter(0)}>
