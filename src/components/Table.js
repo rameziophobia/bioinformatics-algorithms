@@ -76,6 +76,9 @@ export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
                 </div>
             );
             alignmentsList.push(
+                <div key={alignment[0] + alignment[1] + 'score'}>score: {alignment[2]}</div>
+            );
+            alignmentsList.push(
                 <div key={alignment[0] + alignment[1]} className="separator"></div>
             );
         }

@@ -21,9 +21,10 @@ const findAlignmentPaths = (cells) => {
     return paths;
 };
 
-const findAlignments = (paths, string1, string2) => {
+const findAlignments = (paths, string1, string2, matchScore, mismatchScore, penalty) => {
     const alignments = [];
     for (const reveresedPath of paths) {
+        let score = 0;
         const path = reveresedPath.reverse();
         let alignedString1 = '';
         let alignedString2 = '';
@@ -36,20 +37,27 @@ const findAlignments = (paths, string1, string2) => {
                 alignedString1 = alignedString1 + '_';
                 alignedString2 = alignedString2 + string2[string2Index];
                 string2Index++;
+                score += penalty;
             } else if (node.colIndex === nextNode.colIndex) {
                 alignedString1 = alignedString1 + string1[string1Index];
                 string1Index++;
                 alignedString2 = alignedString2 + '_';
+                score += penalty;
             } else {
                 alignedString1 = alignedString1 + string1[string1Index];
                 alignedString2 = alignedString2 + string2[string2Index];
                 string1Index++;
                 string2Index++;
+                if (string1[string1Index] === string2[string2Index]) {
+                    score += matchScore;
+                } else {
+                    score += mismatchScore;
+                }
             }
         }
         console.log(path);
         console.log([alignedString1, alignedString2]);
-        alignments.push([alignedString1, alignedString2]);
+        alignments.push([alignedString1, alignedString2, score]);
     }
     return alignments;
 };
@@ -118,7 +126,7 @@ const allPathsFinished = (paths) => {
 const getNeedlemanMatrixCells = (string1, string2, matchScore, mismatchScore, penalty) => {
     const cells = findTableCells(string1, string2, matchScore, mismatchScore, penalty);
     const paths = findAlignmentPaths(cells);
-    const alignments = findAlignments(paths, string1, string2);
+    const alignments = findAlignments(paths, string1, string2, matchScore, mismatchScore, penalty);
 
     return { cells: cells, alignments: alignments };
 };
