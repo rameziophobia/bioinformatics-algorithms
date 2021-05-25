@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './inputs.css';
 
 export const Inputs = ({ handleInputsChange }) => {
-    const [string1, setString1] = useState('ATT');
-    const [string2, setString2] = useState('ATG');
+    const [string1, setString1] = useState('TTCATA');
+    const [string2, setString2] = useState('TGCTCGTA');
     const [selectedAlgorithm, setSelectedAlgorithm] = useState('needleman');
     const [matchScore, setMatchScore] = useState(2);
     const [mismatchScore, setMismatchScore] = useState(-1);
