@@ -29,8 +29,8 @@ const findAlignments = (paths, string1, string2) => {
         const path = reveresedPath.reverse();
         let alignedString1 = '';
         let alignedString2 = '';
-        let string1Index = 0;
-        let string2Index = 0;
+        let string1Index = path[0].rowIndex;
+        let string2Index = path[0].colIndex;
         for (let i = 0; i < path.length - 1; i++) {
             const node = path[i];
             const nextNode = path[i + 1];
@@ -65,7 +65,7 @@ const findTableCellsAndMaxScoreCells = (string1, string2, matchScore, mismatchSc
     for (let i = 0; i < string1.length + 1; i++) {
         const row = [];
         for (let j = 0; j < string2.length + 1; j++) {
-            const isMatch = string1[i] === string2[j];
+            const isMatch = string1[i - 1] === string2[j - 1];
             let newScore;
             const parents = [];
             if (i === 0 && j === 0) {
@@ -87,7 +87,7 @@ const findTableCellsAndMaxScoreCells = (string1, string2, matchScore, mismatchSc
                 if (isMatch) {
                     diagParentScore = prevData.diagonal + matchScore;
                 } else {
-                    diagParentScore = prevData.diagonal + matchScore + mismatchScore;
+                    diagParentScore = prevData.diagonal + mismatchScore;
                 }
                 newScore = Math.max(newScore, diagParentScore);
 

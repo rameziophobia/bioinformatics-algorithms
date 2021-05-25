@@ -83,7 +83,7 @@ const findTableCells = (string1, string2, matchScore, mismatchScore, penalty) =>
                 if (isMatch) {
                     diagParentScore = prevData.diagonal + matchScore;
                 } else {
-                    diagParentScore = prevData.diagonal + matchScore + mismatchScore;
+                    diagParentScore = prevData.diagonal + mismatchScore;
                 }
                 newScore = Math.max(newScore, diagParentScore);
 
