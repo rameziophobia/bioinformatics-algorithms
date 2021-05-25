@@ -32,6 +32,7 @@ export const Inputs = ({ handleInputsChange }) => {
                     <input
                         type="text"
                         value={value}
+                        onInput
                         onChange={(e) => {
                             if (isNaN(parseInt(e.target.value))) {
                                 setFunction(e.target.value);
@@ -67,19 +68,19 @@ export const Inputs = ({ handleInputsChange }) => {
     return (
         <form onSubmit={handleSubmit} className="form_container">
             <div className="input_label">
-                <label>
-                    Sequence 1: &nbsp;
-                    <input
-                        type="text"
-                        value={string1}
-                        onChange={(e) => setString1(e.target.value.toUpperCase())}
-                    />
-                </label>
+                <label>Sequence 1: &nbsp;</label>
+                <input
+                    className="float_right"
+                    type="text"
+                    value={string1}
+                    onChange={(e) => setString1(e.target.value.toUpperCase())}
+                />
             </div>
             <div className="input_label">
                 <label className="input_label">
                     Sequence 2: &nbsp;
                     <input
+                        className="float_right"
                         type="text"
                         value={string2}
                         onChange={(e) => setString2(e.target.value.toUpperCase())}
@@ -88,7 +89,7 @@ export const Inputs = ({ handleInputsChange }) => {
             </div>
             <div className="input_label">
                 <label>
-                    Select algorithm &nbsp;
+                    Select algorithm: &nbsp;
                     <select
                         value={selectedAlgorithm}
                         onChange={(e) => setSelectedAlgorithm(e.target.value)}>
