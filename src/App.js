@@ -11,7 +11,7 @@ import getWatermanMatrixCells from './algorithms/waterman';
 function App() {
     const [stringState1, setString1] = useState('');
     const [stringState2, setString2] = useState('');
-    const [cells, setCells] = useState([]);
+    const [cells, setCells] = useState({ cells: [] });
     const [hasPadding, setHasPadding] = useState(true);
     const [isWindow, setIsWindow] = useState(false);
 
