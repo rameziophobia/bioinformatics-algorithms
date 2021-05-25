@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './table.css';
 
 export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
     const { alignments = [] } = cells;
-
+    console.log(alignments);
     const modified_string1 = hasPadding ? 'i' + string1 : string1;
     const modified_string2 = hasPadding ? 'j' + string2 : string2;
     const [maxIters, setMaxIters] = useState(modified_string1.length * modified_string2.length - 1);
@@ -48,14 +48,18 @@ export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
                     currentIter--;
                 }
                 row.push(
-                    <div className="table_cell">
+                    <div className="table_cell" key={Math.floor(Math.random() * 10000)}>
                         {currentIter <= stopIter ? cells.cells[i - 1][j].score : ' '}
                     </div>
                 );
                 currentIter++;
             }
         }
-        cellsJSX.push(<div className="table_row">{row}</div>);
+        cellsJSX.push(
+            <div className="table_row" key={Math.floor(Math.random() * 10000)}>
+                {row}
+            </div>
+        );
     }
 
     let alignmentsJSX;
@@ -63,20 +67,28 @@ export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
         const alignmentsList = [];
         for (const alignment of alignments) {
             alignmentsList.push(
-                <div className="alignment_results" key={alignment[0]}>
+                <div
+                    className="alignment_results"
+                    key={alignment[0] + Math.floor(Math.random() * 1000)}>
                     {alignment[0]}
                 </div>
             );
             alignmentsList.push(
-                <div className="alignment_results" key={alignment[1]}>
+                <div
+                    className="alignment_results"
+                    key={alignment[1] + Math.floor(Math.random() * 1000)}>
                     {alignment[1]}
                 </div>
             );
             alignmentsList.push(
-                <div key={alignment[0] + alignment[1] + 'score'}>score: {alignment[2]}</div>
+                <div key={alignment[0] + alignment[1] + 'score' + Math.floor(Math.random() * 1000)}>
+                    score: {alignment[2]}
+                </div>
             );
             alignmentsList.push(
-                <div key={alignment[0] + alignment[1]} className="separator"></div>
+                <div
+                    key={alignment[0] + alignment[1] + Math.floor(Math.random() * 1000)}
+                    className="separator"></div>
             );
         }
         alignmentsList.pop();

@@ -32,7 +32,6 @@ export const Inputs = ({ handleInputsChange }) => {
                     <input
                         type="text"
                         value={value}
-                        onInput
                         onChange={(e) => {
                             if (isNaN(parseInt(e.target.value))) {
                                 setFunction(e.target.value);
