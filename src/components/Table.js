@@ -65,8 +65,16 @@ export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
     if (alignments.length !== 0) {
         const alignmentsList = [];
         for (const alignment of alignments) {
-            alignmentsList.push(<div key={alignment[0]}>{alignment[0]}</div>);
-            alignmentsList.push(<div key={alignment[1]}>{alignment[1]}</div>);
+            alignmentsList.push(
+                <div className="alignment_results" key={alignment[0]}>
+                    {alignment[0]}
+                </div>
+            );
+            alignmentsList.push(
+                <div className="alignment_results" key={alignment[1]}>
+                    {alignment[1]}
+                </div>
+            );
             alignmentsList.push(
                 <div key={alignment[0] + alignment[1]} className="separator"></div>
             );
