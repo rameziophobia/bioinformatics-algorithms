@@ -14,11 +14,17 @@ const getDotMatrixWindowCells = (string1, string2, windowSize, step, threshold) 
     for (let i = 0; i + halfWindowSize < string1.length; i += step) {
         for (let j = 0; j + halfWindowSize < string2.length; j += step) {
             let numMatches = 0;
-            for (let windowIndex = 0; windowIndex < windowSize; windowIndex++) {
+            const isWindowIndexInRange = (windowIndex) =>
+                windowIndex < windowSize &&
+                windowIndex < string1.length &&
+                windowIndex < string2.length;
+
+            for (let windowIndex = 0; isWindowIndexInRange(windowIndex); windowIndex++) {
                 if (string1[i + windowIndex] === string2[j + windowIndex]) {
                     numMatches++;
                 }
             }
+            console.log(numMatches, 'numMtches');
             const isMatch = numMatches >= threshold;
             if (isMatch) {
                 const matchIndexI = i + halfWindowSize;
