@@ -21,20 +21,41 @@ const findAlignmentPaths = (cells) => {
     return paths;
 };
 
-const allPathsFinished = (paths) => {
-    let allFinished = true;
-    for (const path of paths) {
-        if (path[path.length - 1].parents.length !== 0) {
-            allFinished = false;
+const findAlignments = (paths, string1, string2) => {
+    const alignments = [];
+    for (const reveresedPath of paths) {
+        const path = reveresedPath.reverse();
+        let alignedString1 = '';
+        let alignedString2 = '';
+        let string1Index = 0;
+        let string2Index = 0;
+        for (let i = 0; i < path.length - 1; i++) {
+            const node = path[i];
+            const nextNode = path[i + 1];
+            if (node.rowIndex === nextNode.rowIndex) {
+                alignedString1 = alignedString1 + '_';
+                alignedString2 = alignedString2 + string2[string2Index];
+                string2Index++;
+            } else if (node.colIndex === nextNode.colIndex) {
+                alignedString1 = alignedString1 + string1[string1Index];
+                string1Index++;
+                alignedString2 = alignedString2 + '_';
+            } else {
+                alignedString1 = alignedString1 + string1[string1Index];
+                alignedString2 = alignedString2 + string2[string2Index];
+                string1Index++;
+                string2Index++;
+            }
         }
+        console.log(path);
+        console.log([alignedString1, alignedString2]);
+        alignments.push([alignedString1, alignedString2]);
     }
-    return allFinished;
+    return alignments;
 };
 
-const getNeedlemanMatrixCells = (string1, string2, matchScore, mismatchScore, penalty) => {
+const findTableCells = (string1, string2, matchScore, mismatchScore, penalty) => {
     const cells = [];
-    console.log(string1);
-    console.log(string2);
     for (let i = 0; i < string1.length + 1; i++) {
         const row = [];
         for (let j = 0; j < string2.length + 1; j++) {
@@ -81,38 +102,23 @@ const getNeedlemanMatrixCells = (string1, string2, matchScore, mismatchScore, pe
         }
         cells.push(row);
     }
+    return cells;
+};
 
-    console.log('paths');
-    const paths = findAlignmentPaths(cells);
-    const alignments = [];
-    for (const reveresedPath of paths) {
-        const path = reveresedPath.reverse();
-        let alignedString1 = '';
-        let alignedString2 = '';
-        let string1Index = 0;
-        let string2Index = 0;
-        for (let i = 0; i < path.length - 1; i++) {
-            const node = path[i];
-            const nextNode = path[i + 1];
-            if (node.rowIndex === nextNode.rowIndex) {
-                alignedString1 = alignedString1 + '_';
-                alignedString2 = alignedString2 + string2[string2Index];
-                string2Index++;
-            } else if (node.colIndex === nextNode.colIndex) {
-                alignedString1 = alignedString1 + string1[string1Index];
-                string1Index++;
-                alignedString2 = alignedString2 + '_';
-            } else {
-                alignedString1 = alignedString1 + string1[string1Index];
-                alignedString2 = alignedString2 + string2[string2Index];
-                string1Index++;
-                string2Index++;
-            }
+const allPathsFinished = (paths) => {
+    let allFinished = true;
+    for (const path of paths) {
+        if (path[path.length - 1].parents.length !== 0) {
+            allFinished = false;
         }
-        console.log(path);
-        console.log([alignedString1, alignedString2]);
-        alignments.push([alignedString1, alignedString2]);
     }
+    return allFinished;
+};
+
+const getNeedlemanMatrixCells = (string1, string2, matchScore, mismatchScore, penalty) => {
+    const cells = findTableCells(string1, string2, matchScore, mismatchScore, penalty);
+    const paths = findAlignmentPaths(cells);
+    const alignments = findAlignments(paths, string1, string2);
 
     return { cells: cells, alignments: alignments };
 };
