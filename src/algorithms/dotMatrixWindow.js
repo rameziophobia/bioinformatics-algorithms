@@ -4,7 +4,7 @@ const getDotMatrixWindowCells = (string1, string2, windowSize, step, threshold) 
     for (let i = 0; i < string1.length; i++) {
         const row = [];
         for (let j = 0; j < string2.length; j++) {
-            row.push(' ');
+            row.push({ score: ' ' });
         }
         cells.push(row);
     }
@@ -23,12 +23,12 @@ const getDotMatrixWindowCells = (string1, string2, windowSize, step, threshold) 
             if (isMatch) {
                 const matchIndexI = i + halfWindowSize;
                 const matchIndexJ = j + halfWindowSize;
-                cells[matchIndexI][matchIndexJ] = <div className="dot_font">·</div>;
+                cells[matchIndexI][matchIndexJ] = { score: <div className="dot_font">·</div> };
             }
         }
     }
     console.log(halfWindowSize);
-    return cells;
+    return { cells: cells };
 };
 
 export default getDotMatrixWindowCells;

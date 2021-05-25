@@ -6,14 +6,14 @@ const getDotMatrixCells = (string1, string2) => {
         for (let j = 0; j < string2.length; j++) {
             const isMatch = string1[i] === string2[j];
             if (isMatch) {
-                row.push(<div className="dot_font">·</div>);
+                row.push({ score: <div className="dot_font">·</div> });
             } else {
-                row.push(' ');
+                row.push({ score: ' ' });
             }
         }
         cells.push(row);
     }
-    return cells;
+    return { cells: cells };
 };
 
 export default getDotMatrixCells;
