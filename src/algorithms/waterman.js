@@ -60,7 +60,6 @@ const findAlignments = (paths, string1, string2, matchScore, mismatchScore, pena
             }
         }
         alignments.push([alignedString1, alignedString2, score]);
-        return alignments;
     }
     return alignments;
 };
