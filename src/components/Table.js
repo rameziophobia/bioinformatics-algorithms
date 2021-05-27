@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import './table.css';
 
 export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
@@ -38,17 +39,30 @@ export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
         if (i === 0) {
             const stringCells = [];
             for (const chr of modified_string2) {
-                stringCells.push(<div className="table_cell table_header">{chr}</div>);
+                stringCells.push(
+                    <div className="table_cell table_header" key={uuidv4()}>
+                        {chr}
+                    </div>
+                );
             }
-            row = [<div className="table_cell table_header">&nbsp;</div>, ...stringCells];
+            row = [
+                <div className="table_cell table_header" key={uuidv4()}>
+                    &nbsp;
+                </div>,
+                ...stringCells,
+            ];
         } else {
-            row = [<div className="table_cell table_header">{modified_string1[i - 1]}</div>];
+            row = [
+                <div className="table_cell table_header" key={uuidv4()}>
+                    {modified_string1[i - 1]}
+                </div>,
+            ];
             for (let j = 0; j < cells.cells[0].length; j++) {
                 if (cells.cells[i - 1][j].score === ' ' && isWindow) {
                     currentIter--;
                 }
                 row.push(
-                    <div className="table_cell" key={Math.floor(Math.random() * 10000)}>
+                    <div className="table_cell" key={uuidv4()}>
                         {currentIter <= stopIter ? cells.cells[i - 1][j].score : ' '}
                     </div>
                 );
@@ -56,7 +70,7 @@ export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
             }
         }
         cellsJSX.push(
-            <div className="table_row" key={Math.floor(Math.random() * 10000)}>
+            <div className="table_row" key={uuidv4()}>
                 {row}
             </div>
         );
@@ -67,29 +81,17 @@ export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
         const alignmentsList = [];
         for (const alignment of alignments) {
             alignmentsList.push(
-                <div
-                    className="alignment_results"
-                    key={alignment[0] + Math.floor(Math.random() * 1000)}>
+                <div className="alignment_results" key={uuidv4()}>
                     {alignment[0]}
                 </div>
             );
             alignmentsList.push(
-                <div
-                    className="alignment_results"
-                    key={alignment[1] + Math.floor(Math.random() * 1000)}>
+                <div className="alignment_results" key={uuidv4()}>
                     {alignment[1]}
                 </div>
             );
-            alignmentsList.push(
-                <div key={alignment[0] + alignment[1] + 'score' + Math.floor(Math.random() * 1000)}>
-                    score: {alignment[2]}
-                </div>
-            );
-            alignmentsList.push(
-                <div
-                    key={alignment[0] + alignment[1] + Math.floor(Math.random() * 1000)}
-                    className="separator"></div>
-            );
+            alignmentsList.push(<div key={uuidv4()}>score: {alignment[2]}</div>);
+            alignmentsList.push(<div key={uuidv4()} className="separator"></div>);
         }
         alignmentsList.pop();
         alignmentsJSX = (

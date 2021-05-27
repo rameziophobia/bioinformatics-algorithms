@@ -11,8 +11,8 @@ const getDotMatrixWindowCells = (string1, string2, windowSize, step, threshold) 
 
     const halfWindowSize = (windowSize - 1) / 2;
 
-    for (let i = 0; i + halfWindowSize < string1.length; i += step) {
-        for (let j = 0; j + halfWindowSize < string2.length; j += step) {
+    for (let i = 0; i + windowSize < string1.length; i += step) {
+        for (let j = 0; j + windowSize < string2.length; j += step) {
             let numMatches = 0;
             const isWindowIndexInRange = (windowIndex) =>
                 windowIndex < windowSize &&
