@@ -37,3 +37,17 @@ The alignment and alignment score are displayed for the following algorithms
 ## Alignments found
 
 ![Alignments](documentation/alignments.jpg)
+
+## Test cases and Examples
+
+### Dot plot matrix with window
+
+![Dot Plot matrix with window](documentation/alignments.jpg)
+
+### Needleman Wunsch
+
+![Needleman Wunsch example](documentation/alignments.jpg)
+
+### Smith Waterman
+
+![Smith Waterman example](documentation/alignments.jpg)
