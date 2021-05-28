@@ -4,6 +4,10 @@
     align-items: center;
 }
 
+.table_container:last-child {
+    margin-bottom: 5em;
+}
+
 .table_row {
     display: flex;
     flex-direction: row;

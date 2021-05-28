@@ -4,7 +4,6 @@ import './table.css';
 
 export const Table = ({ string1, string2, cells, hasPadding, isWindow }) => {
     const { alignments = [] } = cells;
-    console.log(alignments);
     const modified_string1 = hasPadding ? 'i' + string1 : string1;
     const modified_string2 = hasPadding ? 'j' + string2 : string2;
     const [maxIters, setMaxIters] = useState(modified_string1.length * modified_string2.length - 1);
