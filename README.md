@@ -1,6 +1,6 @@
 # BioInformatics Algorithms Implementation and visualizatoin
 
-deployed live [here](https://bit.ly/3fklUMv) it takes a while to initally load due to the heroku free account limitations
+deployed live [here](https://bit.ly/3fklUMva)
 
 ## Built with
 
@@ -42,12 +42,16 @@ The alignment and alignment score are displayed for the following algorithms
 
 ### Dot plot matrix with window
 
-![Dot Plot matrix with window](documentation/alignments.jpg)
+![Dot Plot matrix with window](documentation/dotplotMatrixWithWindow.jpg)
 
 ### Needleman Wunsch
 
-![Needleman Wunsch example](documentation/alignments.jpg)
+![Needleman Wunsch example](documentation/needlemanTest.jpg)
 
 ### Smith Waterman
 
-![Smith Waterman example](documentation/alignments.jpg)
+![Smith Waterman example](documentation/waterman.jpg)
+
+### Example with multiple alignments
+
+![Smith Waterman example 2](documentation/waterman2.jpg)
